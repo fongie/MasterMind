@@ -1,0 +1,54 @@
+TODO
+
+// Skriva in sitt bräde för varje test
+
+// Grafiska pluttar
+
+// Pluttljud
+
+(spela med DJUR i stället som låter?)
+
+
+MASTERMIND
+
+REGLER
+
+Det finns fyra pluttar av olika färg, placerade i olika ordning.
+
+Spelaren vet från början vilka färger som finns, men inte vilka som sitter var och i vilken ordning, eller om alla färger är med eller ej
+
+Spelaren sätter ut fyra pluttar i någon ordning, så säger programmet/spelet:
+- Hur många som är helt rätt
+- Hur många som är rätt färg på fel plats
+
+Spelaren får göra om tills det blir rätt (eller en gräns man sätter i programmet, sätt svårighetsgrad)
+-------
+
+Spelaren ser:
+
+- Instruktioner + vilka färger som finns
+- Spelare väljer svårighetsgrad
+- Spelare sätter ut pluttar
+- Spelare får veta rätt/rättfärg
+- Spelare gör om tills slut eller rätt
+- Slutmeddelande
+
+------
+
+Kodstruktur:
+
+Startclass - med main metod som startar spelet
+
+Inputclass - hanterar spelarens input
+
+
+Regelklass  - som sätter reglerna och svårighetsgraden
+
+Spelklass INHERIT från regelklass - hanterar spelarens input och berättar hur det går
+
+------
+
+
+
+
+
