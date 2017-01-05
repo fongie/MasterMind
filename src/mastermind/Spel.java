@@ -7,17 +7,18 @@ import java.util.Scanner;
 public class Spel {
 	
 	private final Random 	rand = new Random();
-	private String 			difficulty;
+	//private String 			difficulty;
 	private char[] 			colors;
 	private String[]		colString;
 	private int				numberofPins;
 	private Board			correctBoard;
 	private Board			userBoard;
+	private MMGui			gui;
 		
 		//constructor
 		//default rules = normal
 	public Spel() {
-		difficulty = "normal";
+		//difficulty = "normal";
 		char[] c = {'g','b','s','r'};
 		String[] s = {"GUL","BLÅ","SVART","RÖD"};
 		colors = c;
@@ -27,10 +28,15 @@ public class Spel {
 		
 		//skapa resultatbräda och användarens tomma bräda
 	public void init() {
+		
+		gui = new MMGui();
+
 		correctBoard = new Board(numberofPins);
 		correctBoard.slumpa();		
 		userBoard = new Board(numberofPins);
 		userBoard.slumpa();
+		
+		gui.drawGui();
 	}
 	
 		//kolla efter vinst och stäng ner om det vanns
@@ -143,6 +149,9 @@ public class Spel {
 			System.out.println();
 			char color = in.next().charAt(0);
 			
+			//GUI UPDATE
+			gui.bytaUt(p,color);
+			
 			Pin ny = new Pin(color);
 			this.pinlist[p-1] = ny;
 		}
@@ -152,7 +161,10 @@ public class Spel {
 			
 			Pin[] v = new Pin[numberofPins];
 			for (int i = 0; i < v.length; i++) {
-				v[i] = new Pin(colors[rand.nextInt(colors.length)]);
+				int r = rand.nextInt(colors.length);
+				char col = colors[r];
+				v[i] = new Pin(col);
+				gui.bytaUt((i+1), col);
 			}
 			this.pinlist = v;
 		}
