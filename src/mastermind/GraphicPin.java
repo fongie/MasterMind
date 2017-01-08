@@ -1,10 +1,7 @@
 package mastermind;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-
 import javax.swing.*;
 import javax.swing.border.Border;
 
@@ -14,6 +11,10 @@ import javax.swing.border.Border;
 
 public abstract class GraphicPin extends JButton {
 	
+	/**
+	 * eclipse generated
+	 */
+	private static final long serialVersionUID = -6264678060045280488L;
 	protected Color color;
 	protected int locx; //x-koordinat för placering
 	protected int locy; //y-koordinat för placering	
@@ -41,11 +42,8 @@ public abstract class GraphicPin extends JButton {
 	protected void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		super.paintComponent(g);
-
-		
 		g2.setColor(color); // sätter färgen som initieras i constructor
-		
-		Ellipse2D.Double elli = new Ellipse2D.Double(locx, locy, 100, 100);
+		Ellipse2D.Double elli = new Ellipse2D.Double(locx, locy, Constants.BOARDPINSIZE, Constants.BOARDPINSIZE);
 		g2.fill(elli);
 	}
 	

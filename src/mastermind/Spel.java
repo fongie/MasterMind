@@ -1,56 +1,39 @@
 package mastermind;
 
-import java.util.Locale;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Spel {
 	
 	private final Random 	rand = new Random();
-	//private String 			difficulty;
 	private char[] 			colors;
-	private String[]		colString;
 	private int				numberofPins;
 	private Board			correctBoard;
 	private Board			userBoard;
 	public MMGui			gui;
 		
 		//constructor
-		//default rules = normal
 	public Spel() {
-		//difficulty = "normal";
+		
 		char[] c = {'g','b','s','r'};
-		String[] s = {"GUL","BLÅ","SVART","RÖD"};
 		colors = c;
-		colString = s;
 		numberofPins = 5;
+		correctBoard = new Board(numberofPins);
+		userBoard = new Board(numberofPins);
 	}
 		
-		//skapa resultatbräda och användarens tomma bräda
+		//slumpa ut pinsen och sätt igång grafiken
 	public void init() {
 		
 		this.gui = new MMGui(this);
-
-		correctBoard = new Board(numberofPins);
 		correctBoard.slumpa();		
-		userBoard = new Board(numberofPins);
 		userBoard.slumpa();
-		
 		gui.drawGui();
-		//gui.checkStatus();
 	}
 	
 		//kolla efter vinst och stäng ner om det vanns
-	public void win() {
-		if (userBoard.equals(correctBoard)) {
-			
-			gui.win();
-			//for (int i = 0; i < 10; i++) {
-			//	System.out.println("YAY du vann!! <3");
-			//}
-			//System.out.println("BRA JOBBAT IDA!!!!");
-			//System.exit(0);
-		}
+	public boolean win() {
+		if (userBoard.equals(correctBoard)) {return true;}
+		else {return false;}
 	}
 	
 	public String checkStatus() {
@@ -108,26 +91,6 @@ public class Spel {
 		return str;
 	}
 
-	/*public void bytaPin(int byta) {
-		//Scanner in = new Scanner(System.in);
-		//in.useLocale(Locale.US);
-		//System.out.println("Vilken plupp (1-" + 
-		//					getNumberofPins() + 
-		//					") vill du byta ut?");
-		//int byta = in.nextInt();
-		switch (byta) {
-		case 1: userBoard.bytaUt(1);
-			break;
-		case 2: userBoard.bytaUt(2);
-			break;
-		case 3: userBoard.bytaUt(3);
-			break;
-		case 4: userBoard.bytaUt(4);
-			break;
-		default: System.out.println("FELAKTIG INPUT");
-		}
-	}*/
-	
 	// inre klass för skapade bräden
 	public class Board {
 		
@@ -141,21 +104,8 @@ public class Spel {
 		}
 		
 		public void bytaUt(int p, char color) {
-			//Scanner in = new Scanner(System.in);
-			//System.out.println("Till vilken färg? ");
-			//for (int i = 0; i < colors.length; i++) {
-				//System.out.print(colors[i]);
-				//System.out.print(" för ");
-				//System.out.print(colString[i]);
-				//System.out.print(", ");
-			//}
-			//TODO protect against bad input
-			//System.out.println();
-			//char color = in.next().charAt(0);
-			
-			//GUI UPDATE
+
 			gui.bytaUt(p,color);
-			
 			Pin ny = new Pin(color);
 			this.pinlist[p-1] = ny;
 		}
@@ -244,8 +194,7 @@ public class Spel {
 		String str = "\nBrädet ser ut som följer:\n" + userBoard + "\n\n";
 		
 		//DEBUG
-		//str +="\nRätt är " + correctBoard;
-		
+		str +="\nRätt är " + correctBoard;
 		return str;
 	}
 	
@@ -273,30 +222,4 @@ public class Spel {
 		return str;
 	}*/
 	
-	
-	
-	/*
-		//rules for normal difficulty
-	public void setNormal() {
-		difficulty = "normal";
-		char[] c = {'g','b','s','r'};
-		colors = c;
-		numberofPins = 4;
-	}
-		
-		//rules for hard difficulty
-	public void setHard() {
-			//TODO
-	}
-		
-		//rules for nightmare difficulty
-	public void setNightmare() {
-			//TODO
-	}
-		
-		//rules for torment difficulty
-	public void setTorment() {
-			//TODO
-	}
-	*/
 }

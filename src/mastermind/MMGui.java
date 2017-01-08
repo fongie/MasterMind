@@ -6,9 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-
-// TODO checkStatus i GUI ska ha kolla win() och om man vinner gör rolig vinstgrej
-//just nu kommer det inte ens nån text när checkstatus går vidare
+//GUIbuild för mastermind
 public class MMGui extends Spel {
 	
 	private Spel spel;
@@ -42,9 +40,9 @@ public class MMGui extends Spel {
 	//länka spelet med GUIt så det kan ändras härifrån
 	this.spel = spel;
 	
-		
+	//huvudfönster
 	window = new JFrame();
-	window.setSize(1200, 600);
+	window.setSize(Constants.WINDOW);
 	window.setTitle("MasterMindIDA");
 	window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
@@ -75,13 +73,13 @@ public class MMGui extends Spel {
 	
 	//textruta
 	northPanel = new JPanel();
-	statusText = new JLabel("<html><body><p style='font-size:50px;'>Hej Ida!</p></body></html>");
+	statusText = new JLabel(Constants.GREETTEXT);
 	northPanel.add(statusText);
 	container.add(northPanel, BorderLayout.NORTH);
 	
 	//testknapp
 	southPanel = new JPanel();
-	testBtn = new JButton("<html><body><p style ='font-size:" + Constants.buttonTextSize + "'>HAR JAG RÄTT?");
+	testBtn = new JButton(Constants.BUTTONTEXT);
 	testBtn.addActionListener(new ActionListener()
 	{
 		public void actionPerformed(ActionEvent e) {
@@ -99,20 +97,46 @@ public class MMGui extends Spel {
 	//uppdaterar bilden - finns bättre sätt?
 	public void drawGui() {
 		window.setVisible(true);
+		//debug
+		//System.out.println(spel);
 	}
 	
 	//sätter ut texten om hur många som är rätt osv
 	public void checkStatus(String string) {
-		spel.win();
-		String html = "<html><body><p style='font-size:" + Constants.statusSize + "'>";
+		if (spel.win()) {guiWin();}
+		else {
+		String html = "<html><body><p style='font-size:" + Constants.STATUSSIZE + "'>";
 		statusText.setText(html + string);
+		}
 	}
 	
-	public void win() {
-		System.out.println("woopwoop");
-		String html = "<html><body><p style='font-size:" + Constants.statusSize + "'>";
-		statusText.setText(html + "GRATTIS");
+	//hur GUI ser ut när man vunnit. nu med grattistext + spelaom knapp
+	public void guiWin() {
+		//centerpanel, med kattbild
+		JPanel grattisPanel = new JPanel();
+		JLabel grattis = new JLabel();
+		grattis.setIcon(Constants.WINIMAGE);
+		grattisPanel.add(grattis);
+		centerPanel.removeAll();
+		centerPanel.add(grattisPanel, BorderLayout.CENTER);
 		
+		//headertext med grattis
+		statusText.setText(Constants.GRATSTEXT);
+		
+		//ny knapp för att starta om spelet
+		JButton replayBtn = new JButton("<html><body><p style ='font-size:" + Constants.BUTTONTEXTSIZE + "'>SPELA IGEN");
+		replayBtn.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e) {
+				spel.gui = null;
+				window.dispose();
+				Spel nyttSpel = new Spel();
+				nyttSpel.init();
+			}
+		}
+		);
+		southPanel.removeAll();
+		southPanel.add(replayBtn, BorderLayout.CENTER);
 	}
 	
 	//generera en rad med minipins i alla färger att klicka på
@@ -120,19 +144,16 @@ public class MMGui extends Spel {
 		
 		JPanel rad = new JPanel();
 		rad.setLayout(new BoxLayout(rad, BoxLayout.Y_AXIS));
-		//rad.setLayout(new FlowLayout());
-		
+				
 		MiniPin svart = new MiniPin(this.spel, 's', pluppID);
 		MiniPin bla = new MiniPin(this.spel, 'b', pluppID);
 		MiniPin gul = new MiniPin(this.spel, 'g', pluppID);
 		MiniPin red = new MiniPin(this.spel, 'r', pluppID);
 		
-		int w = 800;
-		int h = 100;
-		svart.setMaximumSize(new Dimension(w,h));
-		bla.setMaximumSize(new Dimension(w,h));
-		gul.setMaximumSize(new Dimension(w,h));
-		red.setMaximumSize(new Dimension(w,h));
+		svart.setMaximumSize(Constants.MINIPIN_BOXSIZE);
+		bla.setMaximumSize(Constants.MINIPIN_BOXSIZE);
+		gul.setMaximumSize(Constants.MINIPIN_BOXSIZE);
+		red.setMaximumSize(Constants.MINIPIN_BOXSIZE);
 		
 		rad.add(svart);
 		rad.add(bla);
@@ -142,6 +163,7 @@ public class MMGui extends Spel {
 		return rad;
 	}
 	
+	//när man klickar på stor plupp, visa miniraden för att byta ut
 	public void bytaPin(int place) {
 		switch (place) {
 		case 1:

@@ -6,14 +6,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 
+//små pins som kommer när man byter pin
 public class MiniPin extends GraphicPin {
 	
-	private int pluppID;
-	
+	/**
+	 * eclipse generated
+	 */
+	private static final long serialVersionUID = -2803256686784670068L;
+
+	//constructor
 	public MiniPin(Spel spel, char color, int pluppID) {
-		super(color);
-		this.pluppID = pluppID;
-		
+		super(color);		
 		
 		//klickar man här sätter man igång att huvudpluppen byts ut..
 		this.addActionListener(new ActionListener() {
@@ -30,7 +33,7 @@ public class MiniPin extends GraphicPin {
 
 		g2.setColor(color); // sätter färgen som initieras i constructor
 		
-		Ellipse2D.Double elli = new Ellipse2D.Double(100, 25, 50, 50);
+		Ellipse2D.Double elli = new Ellipse2D.Double(100, 50, Constants.MINIPINSIZE, Constants.MINIPINSIZE);
 		g2.fill(elli);
 	}
 	
