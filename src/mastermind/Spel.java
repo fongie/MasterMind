@@ -13,7 +13,7 @@ public class Spel {
 	private int				numberofPins;
 	private Board			correctBoard;
 	private Board			userBoard;
-	private MMGui			gui;
+	public MMGui			gui;
 		
 		//constructor
 		//default rules = normal
@@ -29,7 +29,7 @@ public class Spel {
 		//skapa resultatbräda och användarens tomma bräda
 	public void init() {
 		
-		gui = new MMGui();
+		this.gui = new MMGui(this);
 
 		correctBoard = new Board(numberofPins);
 		correctBoard.slumpa();		
@@ -37,16 +37,19 @@ public class Spel {
 		userBoard.slumpa();
 		
 		gui.drawGui();
+		//gui.checkStatus();
 	}
 	
 		//kolla efter vinst och stäng ner om det vanns
 	public void win() {
 		if (userBoard.equals(correctBoard)) {
-			for (int i = 0; i < 10; i++) {
-				System.out.println("YAY du vann!! <3");
-			}
-			System.out.println("BRA JOBBAT IDA!!!!");
-			System.exit(0);
+			
+			gui.win();
+			//for (int i = 0; i < 10; i++) {
+			//	System.out.println("YAY du vann!! <3");
+			//}
+			//System.out.println("BRA JOBBAT IDA!!!!");
+			//System.exit(0);
 		}
 	}
 	
@@ -101,16 +104,17 @@ public class Spel {
 		
 		String str = antalRatt + " pluppar sitter helt rätt nu, medan " + 
 					antalFarg + " pluppar är rätt färg men på fel ställe.";
+		gui.checkStatus(str);
 		return str;
 	}
 
-	public void bytaPin() {
-		Scanner in = new Scanner(System.in);
-		in.useLocale(Locale.US);
-		System.out.println("Vilken plupp (1-" + 
-							getNumberofPins() + 
-							") vill du byta ut?");
-		int byta = in.nextInt();
+	/*public void bytaPin(int byta) {
+		//Scanner in = new Scanner(System.in);
+		//in.useLocale(Locale.US);
+		//System.out.println("Vilken plupp (1-" + 
+		//					getNumberofPins() + 
+		//					") vill du byta ut?");
+		//int byta = in.nextInt();
 		switch (byta) {
 		case 1: userBoard.bytaUt(1);
 			break;
@@ -122,7 +126,7 @@ public class Spel {
 			break;
 		default: System.out.println("FELAKTIG INPUT");
 		}
-	}
+	}*/
 	
 	// inre klass för skapade bräden
 	public class Board {
@@ -136,18 +140,18 @@ public class Spel {
 			this.pinlist = v;
 		}
 		
-		public void bytaUt(int p) {
-			Scanner in = new Scanner(System.in);
-			System.out.println("Till vilken färg? ");
-			for (int i = 0; i < colors.length; i++) {
-				System.out.print(colors[i]);
-				System.out.print(" för ");
-				System.out.print(colString[i]);
-				System.out.print(", ");
-			}
+		public void bytaUt(int p, char color) {
+			//Scanner in = new Scanner(System.in);
+			//System.out.println("Till vilken färg? ");
+			//for (int i = 0; i < colors.length; i++) {
+				//System.out.print(colors[i]);
+				//System.out.print(" för ");
+				//System.out.print(colString[i]);
+				//System.out.print(", ");
+			//}
 			//TODO protect against bad input
-			System.out.println();
-			char color = in.next().charAt(0);
+			//System.out.println();
+			//char color = in.next().charAt(0);
 			
 			//GUI UPDATE
 			gui.bytaUt(p,color);
@@ -249,6 +253,14 @@ public class Spel {
 	// getters
 	public int getNumberofPins() {
 		return this.numberofPins;
+	}
+	
+	public Board getUserBoard() {
+		return this.userBoard;
+	}
+	
+	public Board getCorrectBoard() {
+		return this.correctBoard;
 	}
 	
 	/*

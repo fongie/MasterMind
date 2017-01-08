@@ -19,16 +19,18 @@ public class Mastermind {
 		spel.init();
 		
 		while (true) {
-			Scanner in = new Scanner(System.in);
-			in.useLocale(Locale.US);
+			//Scanner in = new Scanner(System.in);
+			//in.useLocale(Locale.US);
 			
-			System.out.println(spel);
+			//System.out.println(spel);
 			
 			spel.win();
 
-			System.out.println(spel.checkStatus());
+			//detta gör nu GUI när man trycker på HAR JAG RÄTT?
+			//System.out.println(spel.checkStatus());
 			
-			spel.bytaPin();
+			//detta gör nu GUI när man trycker på en knapp
+			//spel.bytaPin();
 		}
 	}
 }
