@@ -24,7 +24,8 @@ public class Constants {
 	public static final int BUTTONTEXTSIZE = 35;
 	public static final String BUTTONTEXT ="<html><body><p style ='font-size:" + BUTTONTEXTSIZE + "'>HAR JAG RÄTT?";
 	public static final String GREETTEXT ="<html><body><p style='font-size:50px;'>Hej Ida!</p></body></html>";
-	public static final String GRATSTEXT = "<html><body><p style='font-size:" + STATUSSIZE + "'> GRATTIS DET VAR RÄTT, HIGH PAW!!";
+	public static final String GRATSTEXT1 = "<html><body><p style='font-size:" + STATUSSIZE + "'> GRATTIS DET VAR RÄTT EFTER BARA ";
+	public static final String GRATSTEXT2 = " FÖRSÖK, HIGH PAW!!";
 	
 	//pluppstorlekar
 	public static final double BOARDPINSIZE = 100;

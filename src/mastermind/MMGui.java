@@ -32,6 +32,8 @@ public class MMGui extends Spel {
 	
 	// knappar
 	private JButton testBtn;
+	
+	private int antalForsok = 0;
 
 	
 	//constructor
@@ -83,6 +85,7 @@ public class MMGui extends Spel {
 	testBtn.addActionListener(new ActionListener()
 	{
 		public void actionPerformed(ActionEvent e) {
+			antalForsok += 1;
 			spel.checkStatus();
 		}
 	}
@@ -121,7 +124,7 @@ public class MMGui extends Spel {
 		centerPanel.add(grattisPanel, BorderLayout.CENTER);
 		
 		//headertext med grattis
-		statusText.setText(Constants.GRATSTEXT);
+		statusText.setText(Constants.GRATSTEXT1 + antalForsok + Constants.GRATSTEXT2);
 		
 		//ny knapp för att starta om spelet
 		JButton replayBtn = new JButton("<html><body><p style ='font-size:" + Constants.BUTTONTEXTSIZE + "'>SPELA IGEN");
