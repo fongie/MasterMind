@@ -1,6 +1,7 @@
 package mastermind;
 
 import java.awt.Color;
+import java.net.URL;
 import java.awt.Dimension;
 
 import javax.swing.ImageIcon;
@@ -30,6 +31,7 @@ public class Constants {
 	public static final double MINIPINSIZE = 70;
 	
 	//images
-	public static final ImageIcon WINIMAGE = new ImageIcon("img/win.jpeg", "cat!");
+	public static URL imurl = Spel.class.getResource("/win.jpeg");
+	public static final ImageIcon WINIMAGE = new ImageIcon(imurl);
 	
 }
