@@ -101,7 +101,7 @@ public class MMGui extends Spel {
 	public void drawGui() {
 		window.setVisible(true);
 		//debug
-		//System.out.println(spel);
+		System.out.println(spel);
 	}
 	
 	//sätter ut texten om hur många som är rätt osv
@@ -134,7 +134,7 @@ public class MMGui extends Spel {
 				spel.gui = null;
 				window.dispose();
 				Spel nyttSpel = new Spel();
-				nyttSpel.init();
+				SwingUtilities.invokeLater(nyttSpel);
 			}
 		}
 		);

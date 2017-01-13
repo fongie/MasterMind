@@ -2,7 +2,7 @@ package mastermind;
 
 import java.util.Random;
 
-public class Spel {
+public class Spel implements Runnable {
 	
 	private final Random 	rand = new Random();
 	private char[] 			colors;
@@ -22,7 +22,7 @@ public class Spel {
 	}
 		
 		//slumpa ut pinsen och sätt igång grafiken
-	public void init() {
+	public void run() {
 		
 		this.gui = new MMGui(this);
 		correctBoard.slumpa();		
